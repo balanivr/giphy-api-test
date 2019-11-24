@@ -2,11 +2,10 @@ import React from 'react';
 import './App.css';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-import { VerticallyCentered } from './components/Layouts';
-import SearchBar from './components/SearchBar';
+import SearchBar from './components/SearchBar/SearchBar';
 
 const theme = createMuiTheme({
   palette: {
@@ -34,11 +33,7 @@ class App extends React.Component {
         <CssBaseline />
 
         <div className="App">
-          <div style={{ width: '40%', height: '100vh', margin: 'auto' }}>
-            <VerticallyCentered>
-              <SearchBar />
-            </VerticallyCentered>
-          </div>
+          <SearchBar />
         </div>
       </MuiThemeProvider>
     );
