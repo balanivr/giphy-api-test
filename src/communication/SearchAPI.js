@@ -6,7 +6,7 @@ class SearchAPI {
     getResults(query, start, limit) {
         return new Promise((resolve, reject) => {
             axios.get(
-                `http://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&offset=${start}&limit=${limit}`
+                `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&offset=${start}&limit=${limit}`
             ).then(response => {
                 let parsed = response.data;
                 let results = parsed.data;
@@ -14,7 +14,7 @@ class SearchAPI {
                 if (results.length)
                     resolve(results);
                 else
-                    reject({ message: 'No results found' });
+                    reject({ message: 'No results found', code: 0 });
             }).catch(e => reject(e));
         })
     };

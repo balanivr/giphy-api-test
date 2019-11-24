@@ -25,7 +25,7 @@ const styles = theme => ({
 
 class NoResultsFound extends React.Component {
     render() {
-        const { classes, query, cancelSearch } = this.props;
+        const { classes, query, cancelSearch, error } = this.props;
 
         return (
             <main className={classes.main}>
@@ -37,7 +37,11 @@ class NoResultsFound extends React.Component {
                     variant={'h6'} 
                     className={classes.textContainer}
                 >
-                    {`No Results Found for "${query}"`}
+                    {
+                        error.code === 0
+                            ? `No Results Found for "${query}"`
+                            : `${error.message}`
+                    }
                 </Typography>
                 <div className={classes.buttonContainer}>
                     <Button 

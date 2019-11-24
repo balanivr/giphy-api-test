@@ -15,6 +15,7 @@ class Search extends React.Component {
             results: [],
             noMoreResults: false,
             noResultsFound: false,
+            error: null,
         }
     }
 
@@ -61,8 +62,8 @@ class Search extends React.Component {
                 this.setState({ noMoreResults: true });
             }
             else {
-                console.log('here');
-                this.setState({ noResultsFound: true });
+                if (e.code === 0)
+                    this.setState({ noResultsFound: true, error: e });
             }
         });
     }
@@ -82,11 +83,12 @@ class Search extends React.Component {
             results, 
             noMoreResults, 
             noResultsFound, 
+            error, 
         } = this.state;
 
         if (noResultsFound) 
             return (
-                <NoResultsFound query={query} cancelSearch={this.cancelSearch} />
+                <NoResultsFound query={query} cancelSearch={this.cancelSearch} error={error} />
             );
         else if (showResults)
             return (
