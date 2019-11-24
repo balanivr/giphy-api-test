@@ -15,18 +15,8 @@ const styles = theme => ({
 });
 
 class SearchField extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            query: '',
-        }
-    }
-
     handleChange = event => {
-        this.setState({
-            query: event.target.value
-        });
+        this.props.updateQuery(event.target.value);
     };
 
     handleKeyPress = event => {
@@ -35,12 +25,11 @@ class SearchField extends React.Component {
     };
 
     handleSearch = () => {
-        this.props.performSearch(this.state.query);
+        this.props.performSearch(this.props.query);
     }
 
     render() {
-        const { classes } = this.props;
-        const { query } = this.state;
+        const { classes, query } = this.props;
 
         return (
             <TextField 

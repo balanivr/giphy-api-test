@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 
-import Search from '../../communication/Search';
 import SearchField from './SearchField';
 
 const styles = theme => ({
@@ -16,6 +15,8 @@ const styles = theme => ({
         width: '100vw', 
         height: '100vh', 
         transition: 'height .3s', 
+        backgroundColor: '#FFF',
+        zIndex: 10
     },
     searchContainer: {
         display: 'flex', 
@@ -27,31 +28,12 @@ const styles = theme => ({
 });
 
 class SearchBar extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            showResults: false,
-        }
-    }
-
-    performSearch = query => {
-        this.setState({ showResults: true });
-
-        let search = new Search();
-        search.getResults(query);
-    }
-
-    cancelSearch = () => {
-        this.setState({ showResults: false });
-    }
-
     renderCancelSearch(showResults) {
         if (showResults)
             return (
                 <IconButton 
                     aria-label="cancel search" 
-                    onClick={this.cancelSearch}
+                    onClick={this.props.cancelSearch}
                 >
                     <ArrowBack />
                 </IconButton>
@@ -63,14 +45,23 @@ class SearchBar extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
-        const { showResults } = this.state;
+        const { 
+            classes, 
+            query, 
+            updateQuery, 
+            showResults, 
+            performSearch,
+        } = this.props;
 
         return (
             <div className={classes.parent} style={{ height: showResults ? 90 : '100vh' }}>
                 <div className={classes.searchContainer}>
                     { this.renderCancelSearch(showResults) } 
-                    <SearchField performSearch={this.performSearch} />
+                    <SearchField 
+                        query={query} 
+                        updateQuery={updateQuery} 
+                        performSearch={performSearch} 
+                    />
                     <span></span>
                 </div>
             </div>

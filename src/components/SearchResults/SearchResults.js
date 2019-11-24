@@ -10,28 +10,44 @@ const styles = theme => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
+        marginTop: 100,
+        marginBottom: 100, 
     },
     gridList: {
         width: '80%',
         maxWidth: 1080,
         minWidth: 200
     },
+    gridTile: {
+        width: '100%', 
+        height: '100%', 
+        backgroundRepeat: 'no-repeat', 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center',
+    }
 });
-
-const gifs = [];
 
 class SearchResults extends React.Component {
     render() {
-        const { classes } = this.props;
+        const { classes, items } = this.props;
 
         return (
             <div className={classes.root}>
                 <GridList cellHeight={160} className={classes.gridList} cols={5}>
-                    {gifs.map(tile => (
-                        <GridListTile key={tile.img} cols={1}>
-                            {/* <img src={tile.img} alt={tile.title} /> */}
-                        </GridListTile>
-                    ))}
+                    {
+                        items.map(
+                            tile => (
+                                <GridListTile key={tile.img} cols={1}>
+                                    <a href={tile.share} target="_blank">
+                                        <div 
+                                            className={classes.gridTile} 
+                                            style={{ backgroundImage: `url('${tile.img}')` }}
+                                        ></div>
+                                    </a>
+                                </GridListTile>
+                            )
+                        )
+                    }
                 </GridList>
             </div>
         );
