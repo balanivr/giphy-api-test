@@ -1,6 +1,6 @@
 # GIPHY API Test
 
-This project demonstrates search using the [GIPHY Search API](https://developers.giphy.com/docs/api#quick-start-guide) in React. The project relies on the libraries highlighted under `dependencies` below, and requires an API key. Please read this entire document before attempting to run this project. A demo of the project may be viewed at:
+This project demonstrates search using the [GIPHY Search API](https://developers.giphy.com/docs/api#quick-start-guide) in React. The project relies on the libraries highlighted under `dependencies` below, and requires an API key. Please read this entire document before attempting to run this project. A demo of the project may be viewed at:<br />
 [https://vikeshcodes.com/giphy](https://vikeshcodes.com/giphy)
 
 ## Dependencies
@@ -9,7 +9,7 @@ The project can by run on any server (by running the `npm run build` command; mo
 - set up your API key
 - install the dependent libraries
 
-Each of these is explained below.
+Each of these are explained below.
 
 ### GIPHY API Key
 
@@ -21,10 +21,10 @@ The project will compile but fail to run without first placing an API key in the
 Follow the steps below once you have generated your key:
 - Navigate to the root directory of this project
 - Create a file named `.env` in the root directory (if it doesn't already exist)
-- Add the following line to the `.env` file:
+- Add the following line to the `.env` file:<br />
 REACT_APP_GIPHY_KEY=################################
 
-(Replace the hash tags with your API key)
+(Replace the hash tags with your API key)<br />
 Note that you will have to restart the server if you already have it running every time to modify the `.env` file. 
 
 ### Dependent Libraries
@@ -47,15 +47,15 @@ The application can be deployed to a server or run on your local machine. `cd` i
 
 ### `npm start`
 
-Runs the app in development mode.
+Runs the app in development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.
+The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.
+Builds the app for production to the `build` folder.<br />
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes. The version deployed at [https://vikeshcodes.com/giphy](https://vikeshcodes.com/giphy) was built using this command.
@@ -78,8 +78,8 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 
 ## Additional Details
 
-For additional details, feel free to shoot an E-Mail to vikesh@beyondthebyte.com. I'd be glad to help in any way I can.<br>
+For additional details, feel free to shoot an E-Mail to vikesh@beyondthebyte.com. I'd be glad to help in any way I can.<br />
 Please bear in mind that I'm working on several projects at any given time, so I might take a few days to write back to you.
 
-You may visit [my portfolio](https://vikeshcodes.com/) to learn more about me and my work.<br>
+You may visit [my portfolio](https://vikeshcodes.com/) to learn more about me and my work.<br />
 If you're hesitant about coding, remember: Coding is more of an art than a science. The goal is the plot, the variables are the characters and you are God, writing their story. Break the code if you have to in order to understand why it was there in the first place. Everyone, even Gods, start somewhere.
