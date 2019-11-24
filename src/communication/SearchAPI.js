@@ -14,7 +14,7 @@ class SearchAPI {
                 if (results.length)
                     resolve(results);
                 else
-                    reject({ message: 'No more results' });
+                    reject({ message: 'No results found' });
             }).catch(e => reject(e));
         })
     };

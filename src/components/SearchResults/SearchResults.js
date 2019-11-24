@@ -66,7 +66,7 @@ class SearchResults extends React.Component {
                 <div className={classes.buttonContainer}>
                     {
                         noMoreResults 
-                        ? <Typography variant={'h6'}>No More Results</Typography>
+                        ? <Typography variant={'h6'}>End of Results</Typography>
                         : <Button 
                             variant={'contained'} 
                             color={'primary'} 

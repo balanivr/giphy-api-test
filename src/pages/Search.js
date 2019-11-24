@@ -3,6 +3,7 @@ import React from 'react';
 import SearchAPI from '../communication/SearchAPI';
 import SearchBar from '../components/SearchBar/SearchBar';
 import SearchResults from '../components/SearchResults/SearchResults';
+import NoResultsFound from '../components/SearchResults/NoResultsFound';
 
 class Search extends React.Component {
     constructor(props) {
@@ -12,14 +13,20 @@ class Search extends React.Component {
             query: '',
             showResults: false,
             results: [],
-            noMoreResults: true,
+            noMoreResults: false,
+            noResultsFound: false,
         }
     }
 
     updateQuery = query => this.setState({ query });
 
     performSearch = (query, start, limit) => {
-        this.setState({ showResults: true, noMoreResults: false });
+        this.setState({ 
+            showResults: true, 
+            noMoreResults: false, 
+            noResultsFound: false,
+        });
+
         let results = [...this.state.results];
 
         if (!start) {
@@ -50,6 +57,10 @@ class Search extends React.Component {
             if (results.length) {
                 this.setState({ noMoreResults: true });
             }
+            else {
+                console.log('here');
+                this.setState({ noResultsFound: true });
+            }
         });
     }
 
@@ -61,12 +72,29 @@ class Search extends React.Component {
         this.performSearch(this.state.query, this.state.results.length);
     }
 
-    render() {
+    renderResults = () => {
         const { 
             query, 
             showResults, 
             results, 
             noMoreResults, 
+            noResultsFound, 
+        } = this.state;
+
+        if (noResultsFound) 
+            return (
+                <NoResultsFound query={query} cancelSearch={this.cancelSearch} />
+            );
+        else if (showResults)
+            return (
+                <SearchResults items={results} loadMore={this.loadMore} noMoreResults={noMoreResults} />
+            );
+    }
+
+    render() {
+        const { 
+            query, 
+            showResults, 
         } = this.state;
 
         return (
@@ -78,15 +106,7 @@ class Search extends React.Component {
                     performSearch={this.performSearch} 
                     cancelSearch={this.cancelSearch} 
                 />
-                {
-                    showResults 
-                        ? <SearchResults 
-                            items={results} 
-                            loadMore={this.loadMore} 
-                            noMoreResults={noMoreResults}
-                        />
-                        : null
-                }
+                {this.renderResults()}
             </React.Fragment>
         )
     }
