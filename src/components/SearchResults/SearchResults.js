@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Button from '@material-ui/core/Button';
@@ -27,6 +28,7 @@ const styles = theme => ({
         backgroundRepeat: 'no-repeat', 
         backgroundSize: 'cover', 
         backgroundPosition: 'center',
+        backgroundColor: '#ededed',
     },
     buttonContainer: {
         textAlign: 'center',
@@ -35,6 +37,22 @@ const styles = theme => ({
 });
 
 class SearchResults extends React.Component {
+    getGridListCols = () => {
+        if (isWidthUp('xl', this.props.width)) {
+            return 5;
+        }
+    
+        if (isWidthUp('lg', this.props.width)) {
+            return 4;
+        }
+    
+        if (isWidthUp('md', this.props.width)) {
+            return 3;
+        }
+    
+        return 2;
+    }
+
     render() {
         const { 
             classes, 
@@ -46,12 +64,12 @@ class SearchResults extends React.Component {
         return (
             <main className={classes.main}>
                 <div className={classes.gridContainer}>
-                    <GridList cellHeight={160} className={classes.gridList} cols={5}>
+                    <GridList cellHeight={160} className={classes.gridList} cols={this.getGridListCols()}>
                         {
                             items.map(
                                 tile => (
                                     <GridListTile key={tile.img} cols={1}>
-                                        <a href={tile.share} target="_blank">
+                                        <a href={tile.share} target="_blank" rel="noopener noreferrer">
                                             <div 
                                                 className={classes.gridTile} 
                                                 style={{ backgroundImage: `url('${tile.img}')` }}
@@ -81,4 +99,4 @@ class SearchResults extends React.Component {
     }
 }
 
-export default withStyles(styles, { withTheme: true })(SearchResults);
+export default withStyles(styles, { withTheme: true })(withWidth()(SearchResults));

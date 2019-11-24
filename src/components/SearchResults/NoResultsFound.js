@@ -8,7 +8,7 @@ const styles = theme => ({
     main: {
         marginTop: 100,
         width: '100vw',
-        height: 'calc(100vh - 100px)',
+        minHeight: 'calc(100vh - 100px)',
         display: 'flex',
         flexDirection: 'column', 
         justifyContent: 'center',
@@ -29,7 +29,10 @@ class NoResultsFound extends React.Component {
 
         return (
             <main className={classes.main}>
-                <img src="https://media2.giphy.com/media/Db3OfoegpwajK/giphy.gif?cid=790b7611342a92c3f2330c61e8e674f680c42e1235a700c3&rid=giphy.gif"></img>
+                <img 
+                    src="https://media2.giphy.com/media/Db3OfoegpwajK/giphy.gif?cid=790b7611342a92c3f2330c61e8e674f680c42e1235a700c3&rid=giphy.gif" 
+                    alt="No Results Found" 
+                />
                 <Typography 
                     variant={'h6'} 
                     className={classes.textContainer}

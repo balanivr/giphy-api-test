@@ -40,7 +40,7 @@ class SearchField extends React.Component {
                 onChange={this.handleChange}
                 onKeyDown={this.handleKeyPress}
                 InputProps={{
-                  endAdornment : 
+                  endAdornment: 
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="search button"

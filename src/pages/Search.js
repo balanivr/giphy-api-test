@@ -21,6 +21,9 @@ class Search extends React.Component {
     updateQuery = query => this.setState({ query });
 
     performSearch = (query, start, limit) => {
+        if (!query.length)
+            return;
+
         this.setState({ 
             showResults: true, 
             noMoreResults: false, 
@@ -34,7 +37,7 @@ class Search extends React.Component {
             start = 0;
         }
         if (!limit) {
-            limit = 25;
+            limit = 24;
         }
 
         let search = new SearchAPI();
