@@ -11,38 +11,63 @@ class Search extends React.Component {
         this.state = {
             query: '',
             showResults: false,
-            results: []
+            results: [],
+            noMoreResults: true,
         }
     }
 
-    performSearch = query => {
-        this.setState({ showResults: true });
+    updateQuery = query => this.setState({ query });
+
+    performSearch = (query, start, limit) => {
+        this.setState({ showResults: true, noMoreResults: false });
+        let results = [...this.state.results];
+
+        if (!start) {
+            results = [];
+            start = 0;
+        }
+        if (!limit) {
+            limit = 25;
+        }
 
         let search = new SearchAPI();
-        search.getResults(query).then(
+        search.getResults(query, start, limit).then(
             (response) => {
-                let results = response.map(image => {
-                    return {
+                response.forEach(image => {
+                    results.push({
                         img: image.images.fixed_width.url,
                         share: image.bitly_gif_url,
                         title: image.title,
                         user: image.username
-                    }
+                    })
                 });
 
                 this.setState({ results });
             }
-        );
+        ).catch((e) => {
+            console.log(e.message);
+
+            if (results.length) {
+                this.setState({ noMoreResults: true });
+            }
+        });
     }
 
     cancelSearch = () => {
         this.setState({ showResults: false, query: '' });
     }
 
-    updateQuery = query => this.setState({ query });
+    loadMore = () => {
+        this.performSearch(this.state.query, this.state.results.length);
+    }
 
     render() {
-        const { query, showResults, results } = this.state;
+        const { 
+            query, 
+            showResults, 
+            results, 
+            noMoreResults, 
+        } = this.state;
 
         return (
             <React.Fragment>
@@ -55,7 +80,11 @@ class Search extends React.Component {
                 />
                 {
                     showResults 
-                        ? <SearchResults items={results} />
+                        ? <SearchResults 
+                            items={results} 
+                            loadMore={this.loadMore} 
+                            noMoreResults={noMoreResults}
+                        />
                         : null
                 }
             </React.Fragment>
