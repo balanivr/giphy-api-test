@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-import SearchBar from './components/SearchBar/SearchBar';
+import Search from './pages/Search';
 
 const theme = createMuiTheme({
   palette: {
@@ -31,9 +31,8 @@ class App extends React.Component {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-
         <div className="App">
-          <SearchBar />
+          <Search />
         </div>
       </MuiThemeProvider>
     );
