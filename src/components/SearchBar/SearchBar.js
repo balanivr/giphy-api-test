@@ -2,26 +2,76 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+
+import Search from '../../communication/Search';
 import SearchField from './SearchField';
 
 const styles = theme => ({
-    verticallyCentered: {
+    parent: {
+        position: 'fixed', 
+        left: 0, 
+        top: 0, 
+        width: '100vw', 
+        height: '100vh', 
+        transition: 'height .3s', 
+    },
+    searchContainer: {
         display: 'flex', 
         flexDirection: 'row', 
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center', 
         height: 'inherit',
     }
 });
 
 class SearchBar extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            showResults: false,
+        }
+    }
+
+    performSearch = query => {
+        this.setState({ showResults: true });
+
+        let search = new Search();
+        search.getResults(query);
+    }
+
+    cancelSearch = () => {
+        this.setState({ showResults: false });
+    }
+
+    renderCancelSearch(showResults) {
+        if (showResults)
+            return (
+                <IconButton 
+                    aria-label="cancel search" 
+                    onClick={this.cancelSearch}
+                >
+                    <ArrowBack />
+                </IconButton>
+            );
+        else 
+            return (
+                <span></span>
+            );
+    }
+
     render() {
         const { classes } = this.props;
+        const { showResults } = this.state;
 
         return (
-            <div style={{ position: 'fixed', left: 0, top: 0, width: '100vw', height: '100vh', transition: 'height .3s' }}>
-                <div className={classes.verticallyCentered}>
-                    <SearchField />
+            <div className={classes.parent} style={{ height: showResults ? 90 : '100vh' }}>
+                <div className={classes.searchContainer}>
+                    { this.renderCancelSearch(showResults) } 
+                    <SearchField performSearch={this.performSearch} />
+                    <span></span>
                 </div>
             </div>
         );

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
@@ -34,8 +35,8 @@ class SearchField extends React.Component {
     };
 
     handleSearch = () => {
-        // TODO: Handle Search Query
-    };
+        this.props.performSearch(this.state.query);
+    }
 
     render() {
         const { classes } = this.props;
@@ -64,5 +65,9 @@ class SearchField extends React.Component {
         )
     }
 }
+
+SearchField.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles, { withTheme: true })(SearchField);
